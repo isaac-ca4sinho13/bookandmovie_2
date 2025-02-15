@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Livros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(to right, green, rgb(2, 255, 230));
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .btn-editar {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .btn-editar:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Livros</h1>
+    <a th:href="@{/livroform}"><button>Cadastrar Livro</button></a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Autor</th>
+                <th>Gênero</th>
+                <th>Páginas</th>
+                <th>País de Origem</th>
+                <th>Classificação Indicativa</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="livro : ${livros}">
+                <td th:text="${livro.nome}"></td>
+                <td th:text="${livro.autor_a}"></td>
+                <td th:text="${livro.genero}"></td>
+                <td th:text="${livro.qtd_paginas}"></td>
+                <td th:text="${livro.pais_origem}"></td>
+                <td th:text="${livro.classificacao_indicativa}"></td>
+                <td>
+                    <a th:href="@{/deletarlivro/{id}(id=${livro.id})}" onclick="return confirm('Tem certeza que deseja excluir este livro?');">
+                    <button class="btn-excluir">Excluir</button>
+                </a>
+                <a th:href="@{/editarLivro/{id}(id=${livro.id})}">
+                    <button class="btn-editar">Editar</button>
+                </a>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
