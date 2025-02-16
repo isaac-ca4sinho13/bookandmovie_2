@@ -7,3 +7,23 @@ CREATE TABLE Livro (
     classificacao_indicativa VARCHAR(10),
     genero VARCHAR(50) NOT NULL
 );
+
+
+CREATE TABLE filme (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    pais_origem VARCHAR(255) NOT NULL,
+    genero VARCHAR(255) NOT NULL,
+    classificacao_indicativa VARCHAR(50) NOT NULL,
+    diretor_a VARCHAR(255) NOT NULL,
+    estudio VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE premio (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    categoria VARCHAR(255) NOT NULL,
+    ano INT NOT NULL,
+    filme_id BIGINT,
+    FOREIGN KEY (filme_id) REFERENCES filme(id) ON DELETE CASCADE
+);
