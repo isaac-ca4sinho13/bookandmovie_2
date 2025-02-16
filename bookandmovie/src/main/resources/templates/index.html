@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página com Botões Centralizados</title>
+    <style>
+        body {
+            background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button><a th:href="@{/cadastrar_livro}">Cadastrar Livro</a></button>
+        <button><a th:href="@{/listar_livro}">Listar Livros</a></button>
+        <button><a th:href="@{/cadastrar_filme}">Cadastrar Filme</a></button>
+        <button><a th:href="@{/listar_filme}">Listar Filmes</a></button>
+    </div>
+</body>
+</html>

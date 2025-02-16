@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Filmes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(to right, green, rgb(2, 255, 230));
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Filmes</h1>
+    <a th:href="@{/cadastrar_filme}"><button>Cadastrar Filme</button></a>
+
+    <form th:action="@{/buscar_filme}" method="get">
+        <input type="number" name="id" placeholder="Digite o ID do filme">
+        <button type="submit">Buscar</button>
+    </form>
+    <br>
+    <a th:href="@{/}"><button>Início</button></a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Diretor(a)</th>
+                <th>Estúdio</th>
+                <th>País de Origem</th>
+                <th>Classificação Indicativa</th>
+                <th>Prêmios</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="filme : ${filmes}">
+                <td th:text="${filme.nome}"></td>
+                <td th:text="${filme.diretor_a}"></td>
+                <td th:text="${filme.estudio}"></td>
+                <td th:text="${filme.pais_origem}"></td>
+                <td th:text="${filme.classificacao_indicativa}"></td>
+            
+                <td>
+                    <ul>
+                        <li th:each="premio : ${filme.premios}">
+                            <span th:text="${premio.nome} + ' (' + ${premio.ano} + ')' "></span>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <a th:href="@{/cadastrar_premio/{id}(id=${filme.id})}">
+                        <button class="btn-adicionar">Adicionar Prêmio</button>
+                    </a>
+                    
+                    <a th:href="@{/deletar_filme/{id}(id=${filme.id})}" onclick="return confirm('Tem certeza que deseja excluir este filme?');">
+                        <button class="btn-excluir">Excluir</button>
+                    </a>
+                    <a th:href="@{/editar_filme/{id}(id=${filme.id})}">
+                        <button class="btn-editar">Editar</button>
+                    </a>
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
