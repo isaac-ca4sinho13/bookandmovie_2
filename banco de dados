@@ -24,6 +24,6 @@ CREATE TABLE premio (
     nome VARCHAR(255) NOT NULL,
     categoria VARCHAR(255) NOT NULL,
     ano INT NOT NULL,
-    filme_id BIGINT,
+    filme_id INT,
     FOREIGN KEY (filme_id) REFERENCES filme(id) ON DELETE CASCADE
 );
